@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @Description TODO
+ * @Description 分页结果
  * @Author hwh
  * @Date 2020/3/1 23:25
  **/

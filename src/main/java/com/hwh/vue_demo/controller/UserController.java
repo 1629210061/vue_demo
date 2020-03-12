@@ -2,10 +2,12 @@ package com.hwh.vue_demo.controller;
 
 import com.hwh.vue_demo.entity.PageRequest;
 import com.hwh.vue_demo.entity.PageResult;
+import com.hwh.vue_demo.entity.ResponseResult;
 import com.hwh.vue_demo.entity.User;
 import com.hwh.vue_demo.service.UserService;
 import org.apache.logging.log4j.message.ReusableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +41,17 @@ public class UserController {
      * @return
      */
     @RequestMapping("/findPage")
-    public PageResult findPage(@RequestBody PageRequest pageRequest){
+    public ResponseResult findPage(@ModelAttribute PageRequest pageRequest){
         return userService.findPage(pageRequest);
+    }
+
+    /**
+     * 更加id更新状态state
+     */
+    @RequestMapping("/updateStateById")
+    public ResponseResult updateStateById(@ModelAttribute User user){
+        System.out.println(user.toString());
+        return userService.updateStateById(user);
     }
 }
 

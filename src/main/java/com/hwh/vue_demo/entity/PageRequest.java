@@ -3,7 +3,7 @@ package com.hwh.vue_demo.entity;
 import lombok.Data;
 
 /**
- * @Description TODO
+ * @Description 分页请求类
  * @Author hwh
  * @Date 2020/3/1 23:23
  **/

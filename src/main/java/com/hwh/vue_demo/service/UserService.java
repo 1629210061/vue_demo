@@ -1,7 +1,7 @@
 package com.hwh.vue_demo.service;
 
 import com.hwh.vue_demo.entity.PageRequest;
-import com.hwh.vue_demo.entity.PageResult;
+import com.hwh.vue_demo.entity.ResponseResult;
 import com.hwh.vue_demo.entity.User;
 
 import java.util.List;
@@ -24,6 +24,11 @@ public interface UserService {
      * @param pageRequest
      * @return
      */
-    PageResult findPage(PageRequest pageRequest);
+    ResponseResult findPage(PageRequest pageRequest);
+
+    /**
+     * 根据id更新state
+     */
+    ResponseResult updateStateById(User user);
 
 }

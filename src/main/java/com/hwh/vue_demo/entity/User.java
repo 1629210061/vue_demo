@@ -21,4 +21,8 @@ public class User {
     private String roleName;
 
     private boolean state;
+
+    public boolean getState() {
+        return this.state;
+    }
 }

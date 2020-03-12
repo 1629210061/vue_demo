@@ -13,7 +13,12 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(User record);
+    /**
+     * 根据id更新数据
+     * @param user
+     * @return
+     */
+    int updateByIdSelective(User user);
 
     int updateByPrimaryKey(User record);
 

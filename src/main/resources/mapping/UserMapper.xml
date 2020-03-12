@@ -96,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hwh.vue_demo.entity.User" >
+  <update id="updateByIdSelective" parameterType="com.hwh.vue_demo.entity.User" >
     update users
     <set >
       <if test="userName != null" >

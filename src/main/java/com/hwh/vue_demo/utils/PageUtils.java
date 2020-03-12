@@ -1,8 +1,13 @@
 package com.hwh.vue_demo.utils;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hwh.vue_demo.entity.PageRequest;
 import com.hwh.vue_demo.entity.PageResult;
+import com.hwh.vue_demo.entity.User;
+import com.hwh.vue_demo.mapper.UserMapper;
+
+import java.util.List;
 
 /**
  * @Description TODO
@@ -10,6 +15,7 @@ import com.hwh.vue_demo.entity.PageResult;
  * @Date 2020/3/1 23:29
  **/
 public class PageUtils {
+
 
     /**
      * 将分页信息进行封装
@@ -26,4 +32,7 @@ public class PageUtils {
         pageResult.setResult(pageInfo.getList());
         return pageResult;
     }
+
+
+
 }
