@@ -13,6 +13,7 @@ import com.hwh.vue_demo.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,16 +41,24 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
-    /**
-     * 分页查询用户信息
-     * @param pageRequest
-     * @return
-     */
+
     @Override
     public ResponseResult findPage(PageRequest pageRequest) {
         PageResult pageResult = PageUtils.getPageResult(pageRequest, getPageInfo(pageRequest));
         ResponseResult success = ResultUtils.success(pageResult);
         return success;
+    }
+
+    @Override
+    public ResponseResult findUserById(Integer id) {
+        User user = userMapper.selectById(id);
+        return ResultUtils.success(user);
+    }
+
+    @Override
+    public ResponseResult deleteById(Integer id) {
+        int i = userMapper.deleteById(id);
+        return ResultUtils.success(i);
     }
 
 
@@ -62,7 +71,11 @@ public class UserServiceImpl implements UserService {
         Integer currentPage = pageRequest.getCurrentPage();
         Integer pageSize = pageRequest.getPageSize();
         PageHelper.startPage(currentPage,pageSize);
-        List<User> users = userMapper.selectPage();
+        String keyWord = pageRequest.getKeyWord();
+        if(keyWord!=null&&!"".equals(keyWord)){
+            keyWord = "%"+pageRequest.getKeyWord()+"%";
+        }
+        List<User> users = userMapper.selectPage(keyWord);
         for(User user:users){
             if(user.getMgState()==1){
                 user.setState(true);
@@ -73,11 +86,8 @@ public class UserServiceImpl implements UserService {
         PageInfo<User> userPageInfo = new PageInfo<>(users);
         return userPageInfo;
     }
-    /**
-     * 更新state数据
-     * @param user
-     * @return
-     */
+
+
     @Override
     public ResponseResult updateStateById(User user) {
         if(user.getState()){
@@ -86,6 +96,27 @@ public class UserServiceImpl implements UserService {
             user.setMgState(0);
         }
         int i = userMapper.updateByIdSelective(user);
+        return ResultUtils.success(i);
+    }
+
+    @Override
+    public ResponseResult updateUserById(User user) {
+        int i = userMapper.updateByIdSelective(user);
+        return ResultUtils.success(i);
+    }
+
+
+    @Override
+    public ResponseResult insertUser(User user) {
+        user.setCreateTime(new Date().toString());
+        user.setType(1);
+        user.setMgState(0);
+        user.setRoleName("普通用户");
+        User oldUser = userMapper.selectByUsername(user.getUserName());
+        if(oldUser!=null){
+            return ResultUtils.fail(100,"该用户名已被注册");
+        }
+        int i = userMapper.insert(user);
         return ResultUtils.success(i);
     }
 

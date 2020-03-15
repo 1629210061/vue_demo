@@ -18,4 +18,9 @@ public class PageRequest {
      * 每页数量
      */
     private Integer pageSize;
+
+    /**
+     * 搜索关键字
+     */
+    private String keyWord;
 }

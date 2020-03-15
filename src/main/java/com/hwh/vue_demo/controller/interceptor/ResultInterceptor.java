@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Description TODO
+ * @Description 拦截器暂时没用
  * @Author hwh
  * @Date 2020/3/2 21:42
  **/
